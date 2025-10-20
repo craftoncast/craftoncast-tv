@@ -14,6 +14,7 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      text-align: center;
     }
     #curtain {
       position: absolute;
@@ -35,7 +36,7 @@
     }
     #launcher {
       z-index: 1;
-      text-align: center;
+      max-width: 800px;
     }
     a button {
       padding: 12px 24px;
@@ -50,6 +51,17 @@
     a button:hover {
       background-color: #ff6699;
     }
+    #instructions {
+      margin-top: 20px;
+      font-size: 0.95em;
+      color: #ccc;
+    }
+    #urlDisplay {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #ffccff;
+      word-break: break-word;
+    }
   </style>
 </head>
 <body>
@@ -60,6 +72,10 @@
     <a id="launchLink" href="#" target="_blank">
       <button>Open Platform</button>
     </a>
+    <div id="instructions">
+      If the button doesn’t work, right-click the screen and choose “Open in browser” or copy the link below:
+    </div>
+    <div id="urlDisplay"></div>
   </div>
   <iframe id="player" allow="autoplay" style="display:none;"></iframe>
 
@@ -107,6 +123,7 @@
     const player = document.getElementById("player");
     const launcher = document.getElementById("launcher");
     const launchLink = document.getElementById("launchLink");
+    const urlDisplay = document.getElementById("urlDisplay");
 
     if (embeddable.includes(platform)) {
       player.src = url;
@@ -114,6 +131,7 @@
     } else {
       launcher.style.display = "block";
       launchLink.href = url;
+      urlDisplay.textContent = url;
     }
   </script>
 </body>
