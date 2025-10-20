@@ -37,7 +37,7 @@
       z-index: 1;
       text-align: center;
     }
-    button {
+    a button {
       padding: 12px 24px;
       font-size: 1.2em;
       background-color: #ff3366;
@@ -47,7 +47,7 @@
       cursor: pointer;
       margin-top: 20px;
     }
-    button:hover {
+    a button:hover {
       background-color: #ff6699;
     }
   </style>
@@ -57,7 +57,9 @@
   <div id="launcher" style="display:none;">
     <h2>CraftonCast Launcher</h2>
     <p>This platform doesn’t allow embedding. Click below to open it in a new tab:</p>
-    <button id="launchBtn">Open Platform</button>
+    <a id="launchLink" href="#" target="_blank">
+      <button>Open Platform</button>
+    </a>
   </div>
   <iframe id="player" allow="autoplay" style="display:none;"></iframe>
 
@@ -104,14 +106,14 @@
 
     const player = document.getElementById("player");
     const launcher = document.getElementById("launcher");
-    const launchBtn = document.getElementById("launchBtn");
+    const launchLink = document.getElementById("launchLink");
 
     if (embeddable.includes(platform)) {
       player.src = url;
       player.style.display = "block";
     } else {
       launcher.style.display = "block";
-      launchBtn.onclick = () => window.open(url, "_blank");
+      launchLink.href = url;
     }
   </script>
 </body>
