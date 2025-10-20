@@ -33,11 +33,33 @@
       border: none;
       z-index: 1;
     }
+    #launcher {
+      z-index: 1;
+      text-align: center;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1.2em;
+      background-color: #ff3366;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #ff6699;
+    }
   </style>
 </head>
 <body>
   <div id="curtain"></div>
-  <iframe id="player" allow="autoplay"></iframe>
+  <div id="launcher" style="display:none;">
+    <h2>CraftonCast Launcher</h2>
+    <p>This platform doesn’t allow embedding. Click below to open it in a new tab:</p>
+    <button id="launchBtn">Open Platform</button>
+  </div>
+  <iframe id="player" allow="autoplay" style="display:none;"></iframe>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -46,13 +68,51 @@
     const sources = {
       Tubi: "https://tubitv.com/home",
       Pluto: "https://pluto.tv/en/live-tv",
+      Freevee: "https://www.amazon.com/freevee",
+      Vudu: "https://www.vudu.com/",
+      Popcornflix: "https://www.popcornflix.com/",
+      Peacock: "https://www.peacocktv.com/",
+      Roku: "https://therokuchannel.roku.com/",
       Crackle: "https://www.crackle.com/",
-      Plex: "https://watch.plex.tv/",
+      FilmRise: "https://filmrise.com/",
+      Archive: "https://archive.org/",
+      Kanopy: "https://www.kanopy.com/",
+      Facebook: "https://www.facebook.com/",
+      Instagram: "https://www.instagram.com/",
+      TikTok: "https://www.tiktok.com/",
+      Twitter: "https://twitter.com/",
+      Reddit: "https://www.reddit.com/",
+      Threads: "https://www.threads.net/",
+      LinkedIn: "https://www.linkedin.com/",
+      Pinterest: "https://www.pinterest.com/",
+      Discord: "https://discord.com/",
+      Tumblr: "https://www.tumblr.com/",
+      Miniclip: "https://www.miniclip.com/",
+      Poki: "https://poki.com/",
+      Kongregate: "https://www.kongregate.com/",
+      CrazyGames: "https://www.crazygames.com/",
+      TubiRomance: "https://tubitv.com/category/romance",
+      PlutoThrillers: "https://pluto.tv/en/live-tv/thrillers",
+      NSFWArt: "https://www.reddit.com/r/nsfwart/",
+      NSFWTumblr: "https://www.tumblr.com/tagged/nsfw",
+      Kosmi: "https://app.kosmi.io/",
       SoundCloud: "https://soundcloud.com/misscrafton"
     };
 
+    const embeddable = ["Kosmi", "SoundCloud"];
+    const url = sources[platform] || sources["Tubi"];
+
     const player = document.getElementById("player");
-    player.src = sources[platform] || sources["Tubi"];
+    const launcher = document.getElementById("launcher");
+    const launchBtn = document.getElementById("launchBtn");
+
+    if (embeddable.includes(platform)) {
+      player.src = url;
+      player.style.display = "block";
+    } else {
+      launcher.style.display = "block";
+      launchBtn.onclick = () => window.open(url, "_blank");
+    }
   </script>
 </body>
 </html>
